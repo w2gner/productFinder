@@ -1,3 +1,3 @@
 # Sistema Escolar
 
-Sistema administrativo para gerenciamento de escola
+Aplicação para localizar produto em supermercados

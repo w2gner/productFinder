@@ -48,7 +48,7 @@ public class PrincipalWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new AlunoWindow(conn).setVisible(true);
+                    new ProdutoWindow(conn).setVisible(true);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -62,7 +62,7 @@ public class PrincipalWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new AlunoWindow(conn).setVisible(true);
+                    new ProdutoWindow(conn).setVisible(true);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -78,15 +78,16 @@ public class PrincipalWindow extends JFrame {
             }
         });
 
-        menuPesquisa = new JMenuItem(new AbstractAction("Alunos") {
+        menuPesquisa = new JMenuItem(new AbstractAction("Listagem") {
 
             private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new AlunoWindow(conn).setVisible(true);
-                } catch (SQLException e1) {
+                    // Criar janela de listagem
+                    // new ProdutoWindow(conn).setVisible(true);
+                } catch (Exception e1) {
                     e1.printStackTrace();
                 }
 
