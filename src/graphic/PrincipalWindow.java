@@ -48,7 +48,7 @@ public class PrincipalWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new ProdutoWindow(conn).setVisible(true);
+                    new UsuarioWindow(conn).setVisible(true);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -85,8 +85,7 @@ public class PrincipalWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    // Criar janela de listagem
-                    // new ProdutoWindow(conn).setVisible(true);
+                    new ListagemWindow(conn).setVisible(true);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }

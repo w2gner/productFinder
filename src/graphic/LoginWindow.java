@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
-// import java.sql.SQLException;
-// import java.util.ArrayList;
-// import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -16,9 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-// import graphic.PrincipalWindow;
-// import database.dao.UsuarioDAO;
-// import database.model.*;
+import graphic.PrincipalWindow;
+import database.dao.UsuarioDAO;
+import database.model.*;
 
 public class LoginWindow extends JFrame {
 
@@ -72,15 +72,15 @@ public class LoginWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				// @SuppressWarnings("deprecation")
-				// String senha = pwfPassword.getText();
-				// String usuario = txfUsuario.getText();
-				// List<Object> Usuarios = new ArrayList<Object>();
+				@SuppressWarnings("deprecation")
+				String senha = pwfPassword.getText();
+				String usuario = txfUsuario.getText();
+				List<Object> Usuarios = new ArrayList<Object>();
 				Boolean LoginSuccessfull = false;
 
 				try {
-					// UsuarioDAO user = new UsuarioDAO(connection);
-					// Usuarios = user.Select(null);
+					UsuarioDAO user = new UsuarioDAO(connection);
+					Usuarios = user.Select(null);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -95,15 +95,15 @@ public class LoginWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "Insira o usuário", "Aviso", JOptionPane.WARNING_MESSAGE,
 							alertIcon);
 				} else {
-					//for (int i = 0; i < Usuarios.size(); i++) {
-						// Usuario teste = (Usuario) Usuarios.get(i);
-						// if (teste.getNome().equals(usuario) && teste.getSenha().equals(senha)) {
-						dispose();
-						new PrincipalWindow(connection).setVisible(true);
-						LoginSuccessfull = true;
-						// break;
-						// }
-					//}
+					for (int i = 0; i < Usuarios.size(); i++) {
+						Usuario teste = (Usuario) Usuarios.get(i);
+						if (teste.getNome().equals(usuario) && teste.getSenha().equals(senha)) {
+							dispose();
+							new PrincipalWindow(connection).setVisible(true);
+							LoginSuccessfull = true;
+							break;
+						}
+					}
 					if (!LoginSuccessfull) {
 						JOptionPane.showMessageDialog(null, "Verifique as informações de login", "Aviso",
 								JOptionPane.WARNING_MESSAGE, alertIcon);
