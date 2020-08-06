@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ListagemWindow",
+            "request": "launch",
+            "mainClass": "graphic.ListagemWindow",
+            "projectName": "productFinder_3b52862c"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

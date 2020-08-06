@@ -5,15 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO extends MasterDAO {
     private Connection connection;
-    private final String select = "select * from tb_produtos";
-    private final String insert = "insert into tb_produtos(nm_produto, num_creditos, valor_creditos) VALUES (?, ?, ?)";
-    private final String update = "update tb_produtos SET nm_produto=?, num_creditos=?, valor_creditos=? WHERE id_produto = ?";
-    private final String delete = "delete from tb_produtos WHERE id_produto = ?";
+    private final String select = "select * from products";
+    private final String insert = "insert into products(id, product_name, description, barcode, position, status, created_at) VALUES (DEFAULT, ?, ?, ?, ?, ? ,?)";
+    private final String update = "update products SET product_name=?, description=?, barcode=?, position=?, status=?, created_at=? WHERE id = ?";
+    private final String delete = "delete from products WHERE id = ?";
     private final PreparedStatement pstSelect, pstInsert, pstDelete, pstUpdate;
 
     public ProdutoDAO(final Connection connection) throws SQLException {
@@ -34,11 +35,12 @@ public class ProdutoDAO extends MasterDAO {
 
         while (resultado.next()) {
             Produto produto = new Produto();
-            produto.setId(resultado.getInt("id_produto"));
-            produto.setNome(resultado.getString("nm_produto"));
-            produto.setCodigoBarras(resultado.getDouble("num_creditos"));
-            produto.setDescricao(resultado.getString("valor_creditos"));
-            produto.setLocalizacao(resultado.getString("valor_creditos"));
+            produto.setId(resultado.getInt("id"));
+            produto.setNome(resultado.getString("product_name"));
+            produto.setCodigoBarras(resultado.getInt("barcode"));
+            produto.setDescricao(resultado.getString("description"));
+            produto.setLocalizacao(resultado.getString("position"));
+            produto.setCriadoEm(resultado.getString("created_at"));
 
             arlDados.add(produto);
 
@@ -55,10 +57,11 @@ public class ProdutoDAO extends MasterDAO {
         Produto produto = (Produto) ao_object;
 
         Set(pstInsert, 1, produto.getNome());
-        Set(pstInsert, 2, produto.getCodigoBarras());
-        Set(pstInsert, 3, produto.getDescricao());
-        Set(pstInsert, 4, produto.getId());
-        Set(pstInsert, 5, produto.getLocalizacao());
+        Set(pstInsert, 2, produto.getDescricao());
+        Set(pstInsert, 3, produto.getCodigoBarras());
+        Set(pstInsert, 4, produto.getLocalizacao());
+        Set(pstInsert, 5, null);
+        pstInsert.setObject(6, LocalDate.now());
 
         pstInsert.execute();
 
@@ -72,10 +75,11 @@ public class ProdutoDAO extends MasterDAO {
         Produto produto = (Produto) ao_object;
 
         Set(pstUpdate, 1, produto.getNome());
-        Set(pstUpdate, 2, produto.getCodigoBarras());
-        Set(pstUpdate, 3, produto.getDescricao());
-        Set(pstUpdate, 4, produto.getId());
-        Set(pstUpdate, 5, produto.getId());
+        Set(pstUpdate, 2, produto.getDescricao());
+        Set(pstUpdate, 3, produto.getCodigoBarras());
+        Set(pstUpdate, 4, produto.getLocalizacao());
+        Set(pstUpdate, 5, null);
+        pstUpdate.setObject(6, LocalDate.now());
 
         pstUpdate.execute();
 

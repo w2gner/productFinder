@@ -68,7 +68,6 @@ public class UsuarioWindow extends JFrame {
             private UsuarioDAO usuarioIO = new UsuarioDAO(connection);
             private List<Object> usuarios = new ArrayList<Object>();
             Usuario usuarioNovo = new Usuario();
-            private Boolean isUpdate = false;
 
             @Override
             @SuppressWarnings("deprecation")
@@ -82,7 +81,7 @@ public class UsuarioWindow extends JFrame {
                     JOptionPane.showMessageDialog(null, "As senhas devem ser iguais", "Aviso",
                             JOptionPane.WARNING_MESSAGE, alertIcon);
                 } else {
-                    
+
                     try {
                         usuarios = usuarioIO.Select(null);
                     } catch (SQLException e2) {
@@ -96,14 +95,17 @@ public class UsuarioWindow extends JFrame {
                                     JOptionPane.WARNING_MESSAGE, alertIcon);
                             break;
                         } else {
-                            usuarioNovo.setNome(txfNome.getText());
-                            usuarioNovo.setSenha(pwfSenha.getText());
                             try {
+                                usuarioNovo.setNome(txfNome.getText());
+                                usuarioNovo.setSenha(pwfSenha.getText());
+
                                 usuarioIO.Insert(usuarioNovo);
+                                LimpaTela();
                                 JOptionPane.showMessageDialog(null, "Usuário criado com sucesso", "Aviso",
                                         JOptionPane.WARNING_MESSAGE, alertIcon);
-                                LimpaTela();
                             } catch (SQLException e1) {
+                                JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o produto!", "Aviso",
+                                        JOptionPane.WARNING_MESSAGE, alertIcon);
                                 e1.printStackTrace();
                             }
                         }

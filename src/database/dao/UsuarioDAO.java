@@ -41,6 +41,7 @@ public class UsuarioDAO extends MasterDAO {
             user.setID(resultado.getInt("id"));
             user.setNome(resultado.getString("full_name"));
             user.setSenha(resultado.getString("password"));
+            user.setCriadoEm(resultado.getString("created_at"));
             usuarios.add(user);
         }
 

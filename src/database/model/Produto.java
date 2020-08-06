@@ -5,7 +5,8 @@ public class Produto {
     private String nome;
     private String descricao;
     private String localizacao;
-    private Double codigoBarras;
+    private Integer codigoBarras;
+    private String criadoEm;
 
     public int getId() {
         return id;
@@ -39,12 +40,20 @@ public class Produto {
         this.localizacao = localizacao;
     }
 
-    public Double getCodigoBarras() {
+    public Integer getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(Double codigoBarras) {
+    public void setCodigoBarras(Integer codigoBarras) {
         this.codigoBarras = codigoBarras;
+    }
+
+    public String getCriadoEm() {
+        return criadoEm;
+    }
+
+    public void setCriadoEm(String criadoEm) {
+        this.criadoEm = criadoEm;
     }
 
 }

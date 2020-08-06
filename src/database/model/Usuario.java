@@ -5,6 +5,7 @@ public class Usuario {
 	private String nome;
 	private Boolean is_Admin;
 	private int id;
+	private String criadoEm;
 
 	public String getSenha() {
 		return senha;
@@ -36,5 +37,21 @@ public class Usuario {
 
 	public void setID(int id) {
 		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCriadoEm() {
+		return criadoEm;
+	}
+
+	public void setCriadoEm(String criadoEm) {
+		this.criadoEm = criadoEm;
 	}
 }

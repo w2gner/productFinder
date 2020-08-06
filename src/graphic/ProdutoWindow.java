@@ -6,6 +6,10 @@ package graphic;
 // import lib.Observer;
 
 import javax.swing.*;
+
+import database.dao.ProdutoDAO;
+import database.model.Produto;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
@@ -89,6 +93,26 @@ public class ProdutoWindow extends JFrame {
                         || txfLocalização.getText().isBlank() || txfNome.getText().isBlank()) {
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Aviso",
                             JOptionPane.WARNING_MESSAGE, alertIcon);
+                } else {
+                    try {
+                        ProdutoDAO produtoIO = new ProdutoDAO(connection);
+                        Produto produto = new Produto();
+
+                        produto.setCodigoBarras(Integer.parseInt(txfCodigo.getText()));
+                        produto.setDescricao(txfDescricao.getText());
+                        produto.setLocalizacao(txfLocalização.getText());
+                        produto.setNome(txfNome.getText());
+
+                        produtoIO.Insert(produto);
+
+                        LimpaTela();
+                        JOptionPane.showMessageDialog(null, "Produto salvo com sucesso!", "Aviso",
+                                JOptionPane.WARNING_MESSAGE, alertIcon);
+                    } catch (SQLException e1) {
+                        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o produto!", "Aviso",
+                                JOptionPane.WARNING_MESSAGE, alertIcon);
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
